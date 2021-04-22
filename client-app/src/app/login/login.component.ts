@@ -1,6 +1,6 @@
 import { EventEmitter } from '@angular/core';
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginData } from '../app.models';
 
 @Component({
@@ -33,6 +33,14 @@ export class LoginComponent implements OnInit {
     if(this.form.valid) {
       this.onSubmit.emit(this.form.value);
     }
+  }
+
+  get username() {
+    return this.form.get("username");
+  }
+
+  get password() {
+    return this.form.get("password");
   }
 
 }
