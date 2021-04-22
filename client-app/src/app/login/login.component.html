@@ -1,19 +1,21 @@
 <div class="card login-card">
     <div class="card-body">
         <h4 class="card-title">Login</h4>
-        <form [formGroup]="form" (ngSubmit)="submitLogin()">
+        <form [formGroup]="form" (ngSubmit)="login()">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" formControlName="username" [class.is-invalid]="username?.touched && !username?.valid">
-                <small *ngIf="username?.touched && !username?.valid" class="form-text text-danger">Username required</small>
+                <input type="text" class="form-control" id="username" formControlName="username" 
+                    [class.is-invalid]="username?.touched && !username?.valid">
+                <div *ngIf="username?.touched && !username?.valid" class="invalid-feedback">Username required</div>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" formControlName="password" [class.is-invalid]="password?.touched && !password?.valid">
-                <small *ngIf="password?.touched && !password?.valid" class="form-text text-danger">Password required</small>
+                <input type="password" class="form-control" id="password" formControlName="password" 
+                    [class.is-invalid]="password?.touched && !password?.valid">
+                <div *ngIf="password?.touched && !password?.valid" class="invalid-feedback">Password required</div>
             </div>
 
-            <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Login</button>
+            <button class="btn btn-primary" type="submit" [disabled]="!form.valid || loading">Login</button>
         </form>
     </div>
 </div>
