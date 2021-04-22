@@ -1,0 +1,19 @@
+<div class="card login-card">
+    <div class="card-body">
+        <h4 class="card-title">Login</h4>
+        <form [formGroup]="form" (ngSubmit)="submitLogin()">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" formControlName="username">
+                <small *ngIf="form.valid" class="form-text text-error">Error</small>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" formControlName="password">
+                <small *ngIf="form.valid" class="form-text text-error">Error</small>
+            </div>
+
+            <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Login</button>
+        </form>
+    </div>
+</div>
