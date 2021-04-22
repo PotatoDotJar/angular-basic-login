@@ -22,7 +22,7 @@ export class AuthenticationService {
   }
 
   login(details: LoginData) {
-    return this.http.post<User>("/api/login", details)
+    return this.http.post<User>("/api/users/authenticate", details)
       .pipe(map((user: User) => {
         localStorage.setItem("currentUser", JSON.stringify(user));
         this.currentUserSubject.next(user);
