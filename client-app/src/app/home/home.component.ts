@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { User } from '../app.models';
 import { AuthenticationService } from '../authentication.service';
@@ -13,7 +14,11 @@ export class HomeComponent implements OnInit {
   currentUser: User | null;
   users: Array<User> = [];
 
-  constructor(private authenticationService: AuthenticationService, private userService: UserService) {
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService,
+    private userService: UserService) {
+
     this.currentUser = authenticationService.currentUserValue;
   }
 

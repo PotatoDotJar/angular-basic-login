@@ -1,21 +1,23 @@
 <div class="card login-card">
     <div class="card-body">
         <h4 class="card-title">Login</h4>
+        <small *ngIf="message" class="text-info">{{ message }}</small>
+        <small *ngIf="error" class="text-danger">{{ error }}</small>
         <form [formGroup]="form" (ngSubmit)="login()">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" class="form-control" id="username" formControlName="username" 
                     [class.is-invalid]="username?.touched && !username?.valid">
-                <div *ngIf="username?.touched && !username?.valid" class="invalid-feedback">Username required</div>
+                <div *ngIf="username?.touched && username?.errors?.required" class="invalid-feedback">Username required</div>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" formControlName="password" 
                     [class.is-invalid]="password?.touched && !password?.valid">
-                <div *ngIf="password?.touched && !password?.valid" class="invalid-feedback">Password required</div>
+                <div *ngIf="password?.touched && password?.errors?.required" class="invalid-feedback">Password required</div>
             </div>
-
-            <button class="btn btn-primary" type="submit" [disabled]="!form.valid || loading">Login</button>
+            
+            <button class="btn btn-primary mr-1" type="submit" [disabled]="!form.valid || loading">Login</button>
         </form>
     </div>
 </div>

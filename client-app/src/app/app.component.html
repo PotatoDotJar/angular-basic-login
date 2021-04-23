@@ -1,5 +1,25 @@
 <header>
-    <h1 class="text-center">Angular Basic Login</h1>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" routerLink="/">Angular Basic Login</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto mb-2 mb-md-0">
+                    <li *ngIf="currentUser" class="nav-item">
+                        <a class="nav-link" routerLink="/" routerLinkActive="active">Home</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <span class="mr-3 welcome-message" *ngIf="currentUser">Hello {{ currentUser?.firstName }}</span>
+                    <a *ngIf="currentUser" class="btn btn-sm btn-outline-warning" (click)="logout()">Logout</a>
+                    <a *ngIf="!currentUser" class="btn btn-sm btn-outline-primary mr-3" routerLink="/login">Login</a>
+                    <a *ngIf="!currentUser" class="btn btn-sm btn-outline-warning" routerLink="/register">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 </header>
 <div class="container">
     <router-outlet></router-outlet>

@@ -1,0 +1,43 @@
+<div class="card register-card">
+    <div class="card-body">
+        <h4 class="card-title">Register</h4>
+        <form *ngIf="form" [formGroup]="form" (ngSubmit)="register()">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" id="firstName" formControlName="firstName" 
+                    [class.is-invalid]="firstName?.touched && !firstName?.valid">
+                <div *ngIf="firstName?.touched && !firstName?.valid" class="invalid-feedback">First Name required</div>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" id="lastName" formControlName="lastName" 
+                    [class.is-invalid]="lastName?.touched && !lastName?.valid">
+                <div *ngIf="lastName?.touched && !lastName?.valid" class="invalid-feedback">Last Name required</div>
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" formControlName="username" 
+                    [class.is-invalid]="username?.touched && !username?.valid">
+                <div *ngIf="username?.touched && !username?.valid" class="invalid-feedback">Username required</div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" formControlName="password" 
+                    [class.is-invalid]="password?.touched && !password?.valid">
+                <div *ngIf="password?.touched && password?.errors?.required" class="invalid-feedback">Password required</div>
+                <div *ngIf="password?.errors?.passwordMismatch" class="invalid-feedback">Passwords do not match</div>
+                <div>{{ password?.errors | json }}</div>
+            </div>
+            <div class="form-group">
+                <label for="password2">Confirm Password</label>
+                <input type="password" class="form-control" id="password2" formControlName="password2" 
+                    [class.is-invalid]="password2?.touched && !password2?.valid">
+                <div *ngIf="password2?.touched && password2?.errors?.required" class="invalid-feedback">Password confirmation required</div>
+                <div *ngIf="password2?.errors?.passwordMismatch" class="invalid-feedback">Passwords do not match</div>
+                <div>{{ password2?.errors | json }}</div>
+            </div>
+            
+            <button class="btn btn-primary" type="submit" [disabled]="!form?.valid || loading">Register</button>
+        </form>
+    </div>
+</div>

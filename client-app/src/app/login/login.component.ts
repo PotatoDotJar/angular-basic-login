@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit {
 
   loading: boolean = false;
   returnUrl: string = "";
+  message: string | null = null;
+  error: string | null = null;
 
   constructor(
     private fb: FormBuilder, 
@@ -34,6 +36,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     // Return url (if any) to redirect to on success login
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.message = this.route.snapshot.queryParams['message'];
   }
 
   public login() {
@@ -42,6 +45,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
+    this.error = null;
 
     const loginDetails: LoginData = this.form.value;
     this.authenticationService.login(loginDetails)
@@ -50,9 +54,15 @@ export class LoginComponent implements OnInit {
         (data: User) => {
           this.router.navigate([this.returnUrl]);
         },
-        (error) => {
-          console.error(error);
+        (err) => {
+          console.error(err);
           this.loading = false;
+
+          if(err.status === 400) {
+            this.error = err.error.message;
+            this.username?.setErrors({ invalid: true });
+            this.password?.setErrors({ invalid: true });
+          }
         }
       );
 

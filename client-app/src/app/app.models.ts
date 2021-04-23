@@ -11,3 +11,10 @@ export interface LoginData {
     lastName: string;
     token: string;
 }
+
+export interface RegisterModel {
+    firstName: string;
+    lastName: string;
+    username: string;
+    password: string;
+}
